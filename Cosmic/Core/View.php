@@ -66,15 +66,18 @@ class View
 
             $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true));
             $twig->addGlobal('locale_base', Locale::get('website/base', true));
+          
+            $twig->addGlobal('online_count', \App\Models\Core::getOnlineCount());
 
             if (request()->player !== null) {
 
+                $twig->addGlobal('player_currency', Player::getCurrencys(request()->player->id));
                 $twig->addGlobal('player', request()->player);
-                $twig->addGlobal('online_count', \App\Models\Core::getOnlineCount());
   
                 $twig->addGlobal('player_permissions', Permission::get(request()->player->rank));
               
                 if(request()->getUrl()->contains('/housekeeping')) {
+                    $twig->addGlobal('staff_count', Admin::getStaffCount(3));
                     $twig->addGlobal('player_rank', Player::getHotelRank(request()->player->rank));
                     $twig->addGlobal('flash_messages', Flash::getMessages());
                     $twig->addGlobal('alert_messages', Admin::getAlertMessages());

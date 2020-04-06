@@ -44,7 +44,8 @@ class Registration
         $settings = Core::settings();
         $playerData = (object)input()->all();
         $playerData->figure = input()->post('figure')->value;
-      
+        $getMaxIp = Player::checkMaxIp(request()->getIp());
+        
         if (Player::exists($username)) {
             response()->json(["status" => "error", "message" => Locale::get('register/username_exists')]);
         }
@@ -53,7 +54,8 @@ class Registration
             response()->json(["status" => "error", "message" => Locale::get('register/email_exists')]);
         }
       
-        if (Player::checkMaxIp(request()->getIp()) >= $settings->registration_max_ip) {
+          
+        if ($getMaxIp != 0 && $getMaxIp >= $settings->registration_max_ip) {
             response()->json(["status" => "error", "message" => Locale::get('register/too_many_accounts')]);
         }
 

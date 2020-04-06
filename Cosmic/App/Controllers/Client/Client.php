@@ -63,11 +63,10 @@ class Client
 
         $user = Player::getDataById(request()->player->id);
       
-        $this->data->shuttle_token = bin2hex(openssl_random_pseudo_bytes(48));
         $this->data->auth_ticket = Token::authTicket($user->id);
         $this->data->unique_id = sha1($user->id . '-' . time());
 
-        Player::update($user->id, ["auth_ticket" => $this->data->auth_ticket, "shuttle_token" => $this->data->shuttle_token]);
+        Player::update($user->id, ["auth_ticket" => $this->data->auth_ticket]);
       
         if ($user->getMembership()) {
             HotelApi::execute('setrank', ['user_id' => $user->id, 'rank' => $user->getMembership()->old_rank]);

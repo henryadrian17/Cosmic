@@ -1,6 +1,3 @@
-public/tmp/*
-public/uploads/*
-
 # PHPStorm
 .idea
 vendor/*

@@ -85,6 +85,7 @@ class Routes extends Router
                 Router::get('/shop', 'Shop\Shop@index');
                 Router::get('/shop/club', 'Shop\Club@index');
                 Router::get('/shop/history', 'Shop\History@index');
+                Router::get('/shop/drawbadge', 'Shop\Drawbadge@index');
                 Router::get('/shop/{lang}/lang', 'Shop\Shop@index');
                 Router::get('/shop/offers/{offerid}', 'Shop\Offers@index');
 
@@ -183,9 +184,11 @@ class Routes extends Router
             });
         });
       
-        Router::error(function(Request $request, \Exception $exception) {
-            response()->redirect('/lost');
-        });
+        if(Config::debug) {
+            Router::error(function(Request $request, \Exception $exception) {
+                response()->json(['error' => $exception->getMessage(), 'code'  => $exception->getCode()]);
+            });
+        }
       
         Router::start();
     }
