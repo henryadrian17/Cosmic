@@ -1,5 +1,4 @@
 RewriteEngine On
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
 RewriteRule ^habbo-imaging/avatarimage$ habbo-imaging/avatarimage.php [QSA,L]
 

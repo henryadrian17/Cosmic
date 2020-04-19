@@ -104,7 +104,7 @@ class Articles
         $posts = Community::getPostsArticleById($article->id);
         foreach($posts as $post) {
             $post->author   = Player::getDataById($post->player_id, array('username', 'look'));
-            $post->message  = $post->message;
+            $post->message  = Helper::bbCode($post->message);
         }
 
         $latest_news = Community::getNews();

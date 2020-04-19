@@ -1,7 +1,6 @@
 <?php
 namespace App\Middleware;
 
-use App\Auth;
 use App\Models\Permission;
 use App\Models\Player;
 
@@ -29,11 +28,7 @@ class AdminAuthMiddleware implements IMiddleware
                 redirect('/housekeeping');
             }
         }
-        
-        if (request()->getIp() != Session::get('ip_address') || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
-            Auth::logout();
-        }
-      
+
         if ($request->player === null) {
             return;
         }

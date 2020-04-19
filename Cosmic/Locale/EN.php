@@ -12,7 +12,6 @@ $GLOBALS['language'] = array (
             'nav_jobs'              => 'Jobs',
             'nav_photos'            => 'Photos',
             'nav_staff'             => 'Staff',
-            'nav_team'              => 'Team',
             'nav_exchange'          => 'Marketplace',
 
             'nav_shop'              => 'shop',

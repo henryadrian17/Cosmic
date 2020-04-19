@@ -12,7 +12,7 @@ class Upload
     private $max_file_size= 0.0;
     private $allowed_mime_types = array();
     private $callbacks = array("before" => null, "after" => null);
-    private $file;
+    private    $file;
     private $mime_helping = array('text'      =>    array('text/plain',),
         'image'     =>    array(
             'image/jpeg',

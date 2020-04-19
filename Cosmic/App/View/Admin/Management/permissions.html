@@ -40,9 +40,9 @@
                         </a>
                      </li>
                      <li class="kt-nav__item">
-                        <a href="#" class="kt-nav__link rankManagement">
+                        <a href="#" class="kt-nav__link commandManagement">
                         <i class="kt-nav__link-icon flaticon2-drop"></i>
-                        <span class="kt-nav__link-text">Sub Rank Management</span>
+                        <span class="kt-nav__link-text">Command Management</span>
                         </a>
                      </li>
                   </ul>
@@ -53,35 +53,32 @@
       </div>
    </div>
 </div>
-  <div class="row" id="rankManagement" style="display: none">
-<div class="kt-portlet kt-portlet--height-fluid kt-portlet--mobile ">
-          <div class="kt-portlet__head kt-portlet__head--lg">
-              <div class="kt-portlet__head-label">
-                  <span class="kt-portlet__head-icon">
-            <i class="kt-font-brand flaticon2-user"></i>
-            </span>
-                  <h3 class="kt-portlet__head-title">
-               Teams
-            </h3>
-              </div>
-              <div class="kt-portlet__head-toolbar">
-                  <div class="kt-portlet__head-wrapper">
-                      <div class="col-md-4 kt-tablet-and-mobile">
-                          <div class="kt-form__group kt-form__group--inline">
-                              <div class="kt-form__label">
-                                  <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#editCategoryModal">Add</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+  <div class="row" id="manageCommands" style="display: none">
+    <div class="col-lg-12">	
+        <div class="kt-portlet" data-ktportlet="true" id="kt_portlet_tools_1" style="">
+          <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+              <h3 class="kt-portlet__head-title">
+                Manage permission commands
+              </h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+              <div class="kt-portlet__head-group">
+                <a href="#" data-ktportlet-tool="toggle" class="btn btn-sm btn-icon btn-clean btn-icon-md"><i class="la la-angle-down"></i></a>
+                <a href="#" data-ktportlet-tool="reload" class="btn btn-sm btn-icon btn-clean btn-icon-md" aria-describedby="tooltip_dlqodm34vq"><i class="la la-refresh"></i></a>
+              <div class="tooltip tooltip-portlet tooltip bs-tooltip-top" role="tooltip" id="tooltip_dlqodm34vq" aria-hidden="true" x-placement="top" style="position: absolute; will-change: transform; visibility: hidden; top: 0px; left: 0px; transform: translate3d(280px, -39px, 0px);">                            <div class="tooltip-arrow arrow" style="left: 28px;"></div>                            <div class="tooltip-inner">Reload</div>                        </div></div>
+            </div>
           </div>
-          <div class="kt-portlet__body kt-portlet__body--fit">
-              <!--begin: Datatable -->
-              <div id="kt_datatable_teams"></div>
-              <!--end: Datatable -->
+          <div class="kt-portlet__body" style="margin: auto;width: 70%;">
+            <div class="alert alert-outline-primary kt-margin-t-10">
+                    This function will be available in version 2 of Asteroid!
+                </div>
+            <div class="kt-portlet__content">
+              <div id="kt_tree_6" class="tree-demo"></div>
+            </div>
           </div>
-      </div>
+        </div>	
+    </div>
   </div>
 <div class="row" id="editPermissions" style="display: none">
    <div class="col-xl-6 col-lg-12 order-lg-1 order-xl-1">
@@ -371,36 +368,6 @@
          </div>
       </div>
    </div>
-</div>
-  <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editCategoryModalLabel">Add Tea</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="categoryName" class="form-control-label">Team name:</label>
-                        <input type="text" class="form-control" id="rank_name">
-                    </div>
-                   <div class="form-group">
-                        <label for="categoryName" class="form-control-label">Description:</label>
-                        <input type="text" class="form-control" id="rank_description">
-                    </div>>
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary saveTeam">Save</button>
-            </div>
-        </div>
-    </div>
 </div>
 <link href="https://keenthemes.com/metronic/themes/metronic/theme/default/demo11/dist/assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 {% endblock %}

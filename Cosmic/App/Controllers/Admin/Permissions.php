@@ -89,24 +89,6 @@ class Permissions
         echo Json::encode($permission);
     }
 
-    public function deleteteam()
-    {
-        Admin::deleteTeam(input()->post('id')->value);
-        Admin::updateTeamPlayer(input()->post('id')->value);
-        response()->json(["status" => "success", "message" => "Team has been deleted!"]);
-    }
-  
-    public function addteam()
-    {
-        Admin::addTeam(input()->post('rank_name')->value, input()->post('rank_desciption')->value);
-        response()->json(["status" => "success", "message" => "Team is added!"]);
-    }
-  
-    public function getteams()
-    {
-        Json::filter(Permission::getTeams(), 'desc', 'id');
-    } 
- 
     public function getpermissions()
     {
         $this->data->permissions = Permission::get(input()->post('roleid')->value);

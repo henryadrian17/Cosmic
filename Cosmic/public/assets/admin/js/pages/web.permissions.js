@@ -24,13 +24,6 @@ var permissions = function() {
                 $("#goBackWizard").show();
                 $("#manageCommands").hide();
             });
-          
-            $(".rankManagement").unbind().click(function() {
-                $("#rankWizard").hide();
-                $("#rankManagement").show();
-                permissions.getRanks();
-            });
-          
          
             $("#goBackWizard").unbind().click(function() {  
                if($('#goBackWizard').css('display') !== 'block'){
@@ -56,107 +49,6 @@ var permissions = function() {
               
             });
         },  
-      
-        getRanks: function() {
-          
-            var datatableCompare = function() {
-
-            if ($('#kt_datatable_teams').length === 0) {
-                return;
-            } else {
-                if ($.trim($('#kt_datatable_teams').html()).length) {
-                    $("#kt_datatable_teams").KTDatatable("destroy")
-                }
-            }
-
-            var t;
-            $("#kt_datatable_teams").KTDatatable({
-                data: {
-                    type: 'remote',
-                    source: {
-                        read: {
-                            url: '/housekeeping/api/permissions/getteams',
-                            headers: {
-                                'Authorization': 'housekeeping_permissions'
-                            }
-                        }
-                    },
-                    pageSize: 10
-                },
-                layout: {
-                    scroll: !1,
-                    footer: !1
-                },
-                pagination: !0,
-                search: {
-                    input: $("#generalSearch")
-                },
-                columns: [{
-                    field: "id",
-                    title: "Rank Id",
-                    width: 75
-                }, {
-                    field: "rank_name",
-                    title: "Rank",
-                    width: 75
-                }, {
-                    field: "rank_description",
-                    title: "Description"
-                }, {
-                    field: "Action",
-                    title: "Action",
-                    overflow: "visible",
-                    autoHide: !1,
-                    template: function() {
-                        return '<a class="btn btn-sm btn-clean btn-icon btn-icon-sm" id="deleteRank" data-toggle="modal" data-target="#confirm-delete" title="Delete"><i class="flaticon2-trash"></i></a>'
-                    }
-                }]
-            });
-
-            $("#kt_datatable_reload").on("click", function() {
-                $("#kt_datatable_teams").KTDatatable("reload")
-            });
-        };
-
-        datatableCompare();
-   
-        $("body").unbind().on("click", "#deleteRank", function(e) {
-            e.preventDefault();
-            let id = $(e.target).closest('.kt-datatable__row').find('[data-field="id"]').text();
-            let rank_name = $(e.target).closest('.kt-datatable__row').find('[data-field="rank_name"]').text();
-
-            $('#confirm-delete').on('show.bs.modal', function(e) {
-                $(".modal-title").html("Delete " + rank_name);
-
-                $(".btn-ok").click(function() {
-                    var self = this;
-                    this.ajax_manager = new WebPostInterface.init();
-                    self.ajax_manager.post("/housekeeping/api/permissions/deleteteam", {
-                        id:id
-                    }, function(result) {
-                        if (result.status == "success") {
-                            $("#kt_datatable_teams").KTDatatable("reload");
-                        }
-                    });
-                });
-            });
-        });
-
-        $(".saveTeam").unbind().click(function() {
-            var self = this;
-            this.ajax_manager = new WebPostInterface.init();
-            self.ajax_manager.post("/housekeeping/api/permissions/addteam", {
-                rank_name: $("#rank_name").val(),
-                rank_desciption: $("#rank_description").val()
-            }, function(result) {
-                if (result.status == "success") {
-                    $('#addCategoryModal').modal('toggle');
-                    $("#kt_datatable_teams").KTDatatable("reload");
-                }
-            });
-        });
-          
-        },
       
         rankRequest: function() {
             var self = this;
