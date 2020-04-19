@@ -93,7 +93,7 @@ function WebInterface() {
                 },
                 callbacks: {
                     open: function () {
-                        $(".rounded-input").keypress(function (e) {
+                        $(".rounded-input").unbind().keypress(function (e) {
                             if (e.which == 13) {
                                 $.magnificPopup.close();
                                 $("#login-request").unbind().click();

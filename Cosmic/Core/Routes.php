@@ -45,7 +45,7 @@ class Routes extends Router
             Router::get('/profile/{user}', 'Home\Profile@profile', ['defaultParameterRegex' => '[a-zA-Z0-9\d\-_=\?!@:\.,]+']);
           
             Router::post('/profile/search', 'Home\Profile@search');
-          
+
             Router::get('/assets/js/web/web.locale.js', function () {
                 header('Content-Type: application/javascript');
                 return 'var Locale = ' . json_encode(Locale::get('website/javascript', true), true) . '';
@@ -118,9 +118,9 @@ class Routes extends Router
                 Router::get('/articles', 'Community\Articles@index');
                 Router::get('/article/{slug}', 'Community\Articles@index', ['defaultParameterRegex' => '[\w\-]+']);
 
-                Router::get('/community/team', 'Community\Team@index');
                 Router::get('/community/photos', 'Community\Photos@index');
                 Router::get('/community/staff', 'Community\Staff@index');
+                Router::get('/community/team', 'Community\Staff@team');
 
                 Router::get('/community/fansites', 'Community\Fansites@index');
 

@@ -53,7 +53,17 @@
                   </div>
                </div>
                {% endif %}
-
+               <div class="form-group row">
+                  <label for="example-text-input" class="col-3 col-form-label">Rank Extra</label>
+                  <div class="col-9">
+                     <select class="form-control" name="extra_rank">
+                        <option value="0">None</option>
+                        {% for ranks in data.teams %}
+                        <option value="{{ranks.id}}" {% if ranks.id == data.user.extra_rank %}selected{% endif %}>{{ranks.id}} - {{ranks.rank_name}}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+               </div>
                {% if 'housekeeping_ranks' in permissions %}
                <div class="form-group row">
                   <label for="example-text-input" class="col-3 col-form-label">Pincode</label>

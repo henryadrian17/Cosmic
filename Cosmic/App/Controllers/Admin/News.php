@@ -73,7 +73,7 @@ class News
         $imagePath = input()->file('imagesUpload')->filename;
 
         if (!empty($imagePath)) {
-            if ($this->imageUpload()) {
+            if ($this->imageUpload($imagePath)) {
                 $imagePath = '/uploads/' . $this->file->getInfo()->filename;
             }
         } else {
@@ -168,21 +168,22 @@ class News
         ]);
     }
 
-    protected function imageUpload()
+    protected function imageUpload($imagePath)
     {
-        $this->file = new Upload();
+        if(preg_match("/^[^\?]+\.(jpg|jpeg|gif|png)(?:\?|$)/", $imagePath)) {
+            $this->file = new Upload();
 
-        $this->file->setInput("imagesUpload");
-        $this->file->setDestinationDirectory("../public/uploads/");
-        $this->file->setUploadFunction("copy");
-        $this->file->setAllowMimeType("image");
-        $this->file->setAutoFilename();
-        $this->file->save();
+            $this->file->setInput("imagesUpload");
+            $this->file->setDestinationDirectory("../public/uploads/");
+            $this->file->setUploadFunction("copy");
+            $this->file->setAllowMimeType("image");
+            $this->file->setAutoFilename();
+            $this->file->save();
 
-        if ($this->file->getStatus()) {
-            return true;
+            if ($this->file->getStatus()) {
+                return true;
+            }
         }
-
         return false;
     }
 }

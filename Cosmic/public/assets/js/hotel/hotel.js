@@ -238,9 +238,9 @@ function HotelLoadingInterface()
     {
         var base = Site.game_url;
         var prod = (Client.external_base) ? '/' + Client.external_base + '/' : '/';
-
+        console.log(Site.game_url + "/" + Client.external_figuremap)
         swfobject.embedSWF(
-            Site.game_url + "/" + Client.external_base + Client.client_swf + "?v=" + Configuration.revision,
+            Site.game_url + "/" + Client.external_base + '/' + Client.client_swf + "?v=" + Configuration.revision,
             "flash-container",
             "100%",
             "100%",

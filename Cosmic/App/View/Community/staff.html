@@ -3,7 +3,7 @@
 {% block body %}
         <header class="page-header flex-container flex-vertical-center">
             <div class="page-header-content">
-                <h1>{{site.shortname}} Staff</h1>
+                <h1>{{site.shortname}} {% if action == "team" %}Teams{% else %}Staff{% endif %}</h1>
                 {{locale.desc}}
             </div>
         </header>
@@ -14,6 +14,7 @@
                 {% if employee.users is not empty %}
                 <article class="default-section">
                       <div class="aside-title-content">{{employee.rank_name}}</div>
+                      {% if action == "team" %}<div class="aside-desc-content">{{employee.rank_description}}</div>{% endif %}
                       <div class="aside-content">
 
                       <div class="members-container">

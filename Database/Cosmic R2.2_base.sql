@@ -485,8 +485,8 @@ INSERT INTO `website_settings` VALUES ('referral_points', '5');
 INSERT INTO `website_settings` VALUES ('referral_waiting_seconds', '3600');
 INSERT INTO `website_settings` VALUES ('user_of_the_week', NULL);
 INSERT INTO `website_settings` VALUES ('draw_badge_imaging', NULL);
-INSERT INTO `website_settings` VALUES ('draw_badge_currency', NULL);
-INSERT INTO `website_settings` VALUES ('draw_badge_price', NULL);
+INSERT INTO `website_settings` VALUES ('draw_badge_currency', '5');
+INSERT INTO `website_settings` VALUES ('draw_badge_price', '1000');
 
 -- ----------------------------
 -- Table structure for website_settings_currencys
@@ -587,10 +587,23 @@ CREATE TABLE `website_badge_requests`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
+-- Table structure for website_extra_ranks
+-- ----------------------------
+DROP TABLE IF EXISTS `website_extra_ranks`;
+CREATE TABLE `website_extra_ranks`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rank_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `rank_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+
+-- ----------------------------
 -- Alter table fixes for Cosmic to work
 -- ----------------------------
 ALTER TABLE users ADD secret_key varchar(40) NULL DEFAULT NULL;
 ALTER TABLE users ADD pincode varchar(11) NULL DEFAULT NULL;
+ALTER TABLE users ADD extra_rank int(2) NULL DEFAULT NULL;
 ALTER TABLE users MODIFY mail VARCHAR(500);
 ALTER TABLE bans MODIFY COLUMN machine_id varchar(255)NOT NULL DEFAULT '';
 

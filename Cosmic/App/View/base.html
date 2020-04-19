@@ -34,11 +34,42 @@
     <link rel="stylesheet" href="/assets/css/web.css?v=1111">
     <link rel="stylesheet" href="/assets/css/web.responsive.css">
 
-    <script src="/assets/js/web/user_settings.js"></script>
-
     <script src="/assets/js/jquery-3.2.1.min.js"></script>
     <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
+  
+    <script>
+    var Site = {
+        name: "{{site.sitename}}",
+        url: "{{site.domain}}",
+        game_url: "{{site.cpath}}",
+        figure_url: "{{site.fpath}}"
+    }
+    
+    {% if player is empty %}
+    var User = {
+        id: 0,
+        username: "",
+        online: 0,
+        is_logged: false,
+        is_staff: false
+    }
+    {% else %}var User = {
+        id: {{player.id}},
+        username: "{{player.username}}",
+        is_logged: true,
+        ticket: "{{player.auth_ticket}}",
+        is_staff: {% if player.rank >= 3 %}true{% else %}false{% endif %}
+
+    };
+    {% endif %}
+
+    var Configuration = {
+        {% if publickey is not empty %}recaptcha_public: "{{publickey}}",{% endif %}
+        revision: "{{revision}}2213",
+        cache: "AEEA19MN001C",
+    }
+    </script>
 </head>
 
 <body class="flex-container flex-direction-column">
@@ -155,8 +186,8 @@
                     <li class="navigation-subitem"><a href="/articles">{{locale_base.nav_news}}</a></li>
                     <li class="navigation-subitem"><a href="/jobs">{{locale_base.nav_jobs}}</a></li>
                     <li class="navigation-subitem"><a href="/community/photos">{{locale_base.nav_photos}}</a></li>
-                    <li class="navigation-subitem"><a href="/community/staff">{{site.shortname}}
-                            {{locale_base.nav_staff}}</a></li>
+                    <li class="navigation-subitem"><a href="/community/staff">{{site.shortname}} {{locale_base.nav_staff}}</a></li>
+                    <li class="navigation-subitem"><a href="/community/team">{{site.shortname}} {{locale_base.nav_team}}</a></li>
                 </ul>
             </li>
 

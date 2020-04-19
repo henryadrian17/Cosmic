@@ -64,6 +64,11 @@ class Permission
 
         return QueryBuilder::table('permissions')->orderBy('id', 'desc')->get();
     }
+  
+    public static function getTeams()
+    {
+        return QueryBuilder::table('website_extra_ranks')->get();
+    }
 
     public static function getRoles($string = null)
     {

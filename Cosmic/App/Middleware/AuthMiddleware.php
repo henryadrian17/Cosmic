@@ -23,7 +23,7 @@ class AuthMiddleware implements IMiddleware
         if($request->player == null) {
             return;
         }
-
+      
         if (request()->getIp() != Session::get('ip_address') || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
             Auth::logout();
         }

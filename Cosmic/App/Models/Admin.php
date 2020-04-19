@@ -301,12 +301,13 @@ class Admin
         return QueryBuilder::table('users')->select('username')->select('id')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('username', 'LIKE', $string . '%')->limit($limit)->get();
     }
 
-    public static function changePlayerSettings($email, $motto, $pin_code, $user_id)
+    public static function changePlayerSettings($email, $motto, $pin_code, $user_id, $extra_rank)
     {
         $data = array(
-            'mail'         => $email,
-            'motto'         => $motto,
-            'pincode'       => $pin_code
+            'mail'        => $email,
+            'motto'       => $motto,
+            'pincode'     => $pin_code,
+            'extra_rank'  => $extra_rank
         );
 
         return QueryBuilder::table('users')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('id', $user_id)->update($data);
@@ -696,6 +697,26 @@ class Admin
         return QueryBuilder::table('website_forum_index')->where('id', $id)->delete();
     }
 
+    public static function deleteTeam($id)
+    {
+        return QueryBuilder::table('website_extra_ranks')->where('id', $id)->delete();
+    }
+
+    public static function addTeam($rank, $description)
+    {
+        $data = array(
+            'rank_name'         => $rank,
+            'rank_description'  => $description
+        );
+      
+        return QueryBuilder::table('website_extra_ranks')->insert($data);
+    } 
+  
+    public static function updateTeamPlayer($id)
+    {
+        return QueryBuilder::table('users')->where('extra_rank', $id)->update(['extra_rank' => NULL]);
+    }
+  
     public static function deleteCategory($id)
     {
         return QueryBuilder::table('website_forum_categories')->where('id', $id)->delete();

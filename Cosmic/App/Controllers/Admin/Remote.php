@@ -52,6 +52,7 @@ class Remote
         $this->data->user->id           = $this->user->id;
         $this->data->user->username     = $this->user->username;
         $this->data->user->rank_id      = $this->user->rank;
+        $this->data->user->extra_rank   = $this->user->extra_rank;
         $this->data->user->mail         = $this->user->mail;
         $this->data->user->motto        = Helper::filterString($this->user->motto);
         $this->data->user->credits      = $this->user->credits;
@@ -60,6 +61,7 @@ class Remote
 
         if(Permission::exists('housekeeping_ranks', request()->player->rank)) {
             $this->data->hotel_ranks     = Permission::getRanks(true);
+            $this->data->teams           = Permission::getTeams();
         }
 
         if ($this->user->rank >= request()->player->rank) {
@@ -363,6 +365,7 @@ class Remote
         $motto = (input()->post('motto')->value ? input()->post('motto')->value : $player->motto);
         $rank = (input()->post('rank')->value ? input()->post('rank')->value : (string)$player->rank);
         $credits = (input()->post('credits')->value ? input()->post('credits')->value : (string)$player->credits);
+        $extra_rank = (input()->post('extra_rank')->value ? input()->post('extra_rank')->value : null);
       
         $currencys = Player::getCurrencys($player->id);
         foreach($currencys as $currency) {
@@ -398,7 +401,7 @@ class Remote
             }
         }
         
-        if (Admin::changePlayerSettings($email ?? $player->mail, $motto, $pin_code, $player->id)) {
+        if (Admin::changePlayerSettings($email ?? $player->mail, $motto, $pin_code, $player->id, $extra_rank)) {
 
             if($player->credits != $credits) {
                 HotelApi::execute('givecredits', ['user_id' => $player->id, 'credits' => - $player->credits + $credits]);
